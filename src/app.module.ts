@@ -3,6 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { RoadmapController } from './roadmap/roadmap.controller';
+import { RoadmapService } from './roadmap/roadmap.service';
+import { RoadmapModule } from './roadmap/roadmap.module';
 import appConfig from './config/app.config';
 
 @Module({
@@ -22,8 +25,9 @@ import appConfig from './config/app.config';
     ConfigModule.forRoot({
       load: [appConfig],
     }),
+    RoadmapModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, RoadmapController],
+  providers: [AppService, RoadmapService],
 })
 export class AppModule {}
