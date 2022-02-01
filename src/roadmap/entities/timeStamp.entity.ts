@@ -27,7 +27,4 @@ export class TimeStamp {
   )
   @JoinColumn({ referencedColumnName: 'id' })
     roadmap: Roadmap;
-  
-  @Column({ nullable: true })
-    roadmapId: number;
 }

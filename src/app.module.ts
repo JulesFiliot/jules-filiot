@@ -3,8 +3,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { RoadmapController } from './roadmap/roadmap.controller';
-import { RoadmapService } from './roadmap/roadmap.service';
 import { RoadmapModule } from './roadmap/roadmap.module';
 import appConfig from './config/app.config';
 
@@ -27,7 +25,7 @@ import appConfig from './config/app.config';
     }),
     RoadmapModule,
   ],
-  controllers: [AppController, RoadmapController],
-  providers: [AppService, RoadmapService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
