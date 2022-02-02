@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { CreateRoadmapDto } from './dto/create-roadmap.dto';
+import { CreateTimeStampDto } from './dto/create-timeStamp.dto';
 import { Roadmap } from './entities/roadmap.entity';
 import { TimeStamp } from './entities/timeStamp.entity';
 
@@ -13,9 +15,9 @@ export class RoadmapService {
     private readonly timeStampRepository: Repository<TimeStamp>,
   ) {}
 
-  createRoadmap(todoBody: any) {
+  createRoadmap(createRoadmapDto: CreateRoadmapDto) {
     const roadmap = this.roadmapRepository.create({
-      ...todoBody,
+      ...createRoadmapDto,
     });
     return this.roadmapRepository.save(roadmap);
   }
@@ -26,16 +28,14 @@ export class RoadmapService {
     });
   }
 
-  createTimeStamp(todoBody: any) {
+  createTimeStamp(createTimeStampDto: CreateTimeStampDto) {
     const timeStamp = this.timeStampRepository.create({
-      ...todoBody,
+      ...createTimeStampDto,
     });
     return this.timeStampRepository.save(timeStamp);
   }
 
   findAllTimeStamp() {
-    return this.timeStampRepository.find({
-      relations: ['roadmap'],
-    });
+    return this.timeStampRepository.find();
   }
 }

@@ -16,7 +16,6 @@ export class Roadmap {
 	@OneToMany(
 	  () => TimeStamp,
 	  timeStamp => timeStamp.roadmap,
-	  { cascade: true }
 	)
 	  timeStamps: TimeStamp[];
 }
