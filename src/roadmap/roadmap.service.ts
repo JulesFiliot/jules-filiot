@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateRoadmapDto } from './dto/create-roadmap.dto';
@@ -15,6 +15,7 @@ export class RoadmapService {
     private readonly timeStampRepository: Repository<TimeStamp>,
   ) {}
 
+  // ROADMAPS
   createRoadmap(createRoadmapDto: CreateRoadmapDto) {
     const roadmap = this.roadmapRepository.create({
       ...createRoadmapDto,
@@ -28,6 +29,20 @@ export class RoadmapService {
     });
   }
 
+  async findOneRoadmap(id: string) {
+    const roadmap = await this.roadmapRepository.findOne(id, {
+      relations: ['timeStamps'],
+    });
+    if (!roadmap) throw new NotFoundException(`Could not find roadmap if id ${id}`);
+    return roadmap;
+  }
+
+  async removeRoadmap(id: string) {
+    const roadmap = await this.findOneRoadmap(id);
+    return this.roadmapRepository.remove(roadmap);
+  }
+
+  // TIME STAMPS
   createTimeStamp(createTimeStampDto: CreateTimeStampDto) {
     const timeStamp = this.timeStampRepository.create({
       ...createTimeStampDto,
@@ -37,5 +52,16 @@ export class RoadmapService {
 
   findAllTimeStamp() {
     return this.timeStampRepository.find();
+  }
+
+  async findOneTimeStamp(id: string) {
+    const timeStamp = await this.timeStampRepository.findOne(id);
+    if (!timeStamp) throw new NotFoundException(`Could not find time stamp of id ${id}`);
+    return timeStamp;
+  };
+
+  async removeTimeStamp(id: string) {
+    const timeStamp = await this.findOneTimeStamp(id);
+    return this.timeStampRepository.remove(timeStamp);
   }
 }
