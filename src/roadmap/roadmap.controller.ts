@@ -1,7 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateRoadmapDto } from './dto/create-roadmap.dto';
 import { CreateTimeStampDto } from './dto/create-timeStamp.dto';
+import { UpdateRoadMapDto } from './dto/update-roadmap.dto';
+import { UpdateTimeStampDto } from './dto/update-timeStamp.dto';
 import { RoadmapService } from './roadmap.service';
 
 @ApiTags('roadmaps')
@@ -25,6 +27,11 @@ export class RoadmapController {
     return this.roadmapService.findOneTimeStamp(id);
   }
 
+  @Patch('/timestamps/:id')
+  updateTimeStamp(@Param('id') id: string, @Body() updateTimeStampDto: UpdateTimeStampDto) {
+    return this.roadmapService.updateTimeStamp(id, updateTimeStampDto);
+  }
+
   @Delete('/timestamps/:id')
   removeTimeStamp(@Param('id') id: string) {
     return this.roadmapService.removeTimeStamp(id);
@@ -39,6 +46,11 @@ export class RoadmapController {
   @Get()
   findAllRoadmap() {
     return this.roadmapService.findAllRoadmap();
+  }
+
+  @Patch(':id')
+  updateRoadmap(@Param('id') id: string, @Body() updateRoadMapDto: UpdateRoadMapDto) {
+    return this.roadmapService.updateRoadmap(id, updateRoadMapDto);
   }
 
   @Get(':id')

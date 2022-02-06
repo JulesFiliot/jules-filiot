@@ -3,6 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateRoadmapDto } from './dto/create-roadmap.dto';
 import { CreateTimeStampDto } from './dto/create-timeStamp.dto';
+import { UpdateRoadMapDto } from './dto/update-roadmap.dto';
+import { UpdateTimeStampDto } from './dto/update-timeStamp.dto';
 import { Roadmap } from './entities/roadmap.entity';
 import { TimeStamp } from './entities/timeStamp.entity';
 
@@ -23,6 +25,15 @@ export class RoadmapService {
     return this.roadmapRepository.save(roadmap);
   }
 
+  async updateRoadmap(id: string, updateRoadMapDto: UpdateRoadMapDto) {
+    const roadmap = await this.roadmapRepository.preload({
+      id: +id,
+      ...updateRoadMapDto,
+    });
+    if (!roadmap) throw new NotFoundException(`Could not find roadmap of id ${id}`);
+    return this.roadmapRepository.save(roadmap);
+  }
+
   findAllRoadmap() {
     return this.roadmapRepository.find({
       relations: ['timeStamps'],
@@ -33,7 +44,7 @@ export class RoadmapService {
     const roadmap = await this.roadmapRepository.findOne(id, {
       relations: ['timeStamps'],
     });
-    if (!roadmap) throw new NotFoundException(`Could not find roadmap if id ${id}`);
+    if (!roadmap) throw new NotFoundException(`Could not find roadmap of id ${id}`);
     return roadmap;
   }
 
@@ -47,6 +58,15 @@ export class RoadmapService {
     const timeStamp = this.timeStampRepository.create({
       ...createTimeStampDto,
     });
+    return this.timeStampRepository.save(timeStamp);
+  }
+
+  async updateTimeStamp(id: string, updateTimeStampDto: UpdateTimeStampDto) {
+    const timeStamp = await this.timeStampRepository.preload({
+      id: +id,
+      ...updateTimeStampDto,
+    });
+    if (!timeStamp) throw new NotFoundException(`Could not find time stamp of id ${id}`);
     return this.timeStampRepository.save(timeStamp);
   }
 
