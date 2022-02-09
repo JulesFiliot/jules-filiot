@@ -51,6 +51,7 @@ export class RoadmapService {
 
   async removeRoadmap(id: string) {
     const roadmap = await this.findOneRoadmap(id);
+    if (roadmap.timeStamps) await this.timeStampRepository.remove(roadmap.timeStamps);
     return this.roadmapRepository.remove(roadmap);
   }
 
