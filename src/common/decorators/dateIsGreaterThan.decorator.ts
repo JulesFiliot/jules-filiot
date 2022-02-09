@@ -15,9 +15,7 @@ export function DateIsGreaterThan(property: string, validationOptions?: Validati
           const [relatedPropertyName] = args.constraints;
           const relatedValue = (args.object as any)[relatedPropertyName];
           return (
-            moment(value, moment.ISO_8601).isValid()
-            && moment(relatedValue, moment.ISO_8601).isValid()
-            && moment(value).toISOString() > moment(relatedValue).toISOString()
+            moment(value).toISOString() > moment(relatedValue).toISOString()
           );
         },
       },

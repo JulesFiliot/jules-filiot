@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateRoadmapDto } from './dto/create-roadmap.dto';
@@ -7,6 +7,7 @@ import { UpdateRoadMapDto } from './dto/update-roadmap.dto';
 import { UpdateTimeStampDto } from './dto/update-timeStamp.dto';
 import { Roadmap } from './entities/roadmap.entity';
 import { TimeStamp } from './entities/timeStamp.entity';
+import * as moment from 'moment';
 
 @Injectable()
 export class RoadmapService {
@@ -62,11 +63,21 @@ export class RoadmapService {
   }
 
   async updateTimeStamp(id: string, updateTimeStampDto: UpdateTimeStampDto) {
+    const actualTimeStamp = await this.findOneTimeStamp(id);
+    if (
+      actualTimeStamp.endDate
+      && updateTimeStampDto.startDate
+      && !updateTimeStampDto.endDate
+      && moment(actualTimeStamp.endDate).toISOString() <= moment(updateTimeStampDto.startDate).toISOString()
+    ) {
+      throw new HttpException(`Could not update time stamp of id ${id}. endDate must be greater than startDate.`, HttpStatus.FORBIDDEN);
+    }
     const timeStamp = await this.timeStampRepository.preload({
       id: +id,
       ...updateTimeStampDto,
     });
     if (!timeStamp) throw new NotFoundException(`Could not find time stamp of id ${id}`);
+
     return this.timeStampRepository.save(timeStamp);
   }
 
