@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
+import { Category } from '../entities/category.entity';
 
 export class CreateSkillDto {
 	@ApiProperty({ description: 'Skill title' })
@@ -17,7 +18,5 @@ export class CreateSkillDto {
 
   @ApiProperty({ description: 'Skill category' })
   @IsNotEmpty()
-	@IsString()
-  @MaxLength(20)
-	readonly category: string;
+	readonly category: Category;
 }
