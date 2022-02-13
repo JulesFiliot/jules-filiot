@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateSkillDto } from './dto/create-skill.dto';
+import { UpdateCategoryDto } from './dto/update-category.dto';
 import { UpdateSkillDto } from './dto/update-skill.dto';
 import { SkillService } from './skill.service';
 
@@ -9,6 +10,28 @@ import { SkillService } from './skill.service';
 export class SkillController {
   constructor(private readonly skillService: SkillService) {}
 
+  // CATEGORIES
+  @Get('/categories')
+  findAllCategories() {
+    return this.skillService.findAllCategories();
+  }
+
+  @Patch('/categories/:id')
+  updateCategory(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
+    return this.skillService.updateCategory(id, updateCategoryDto);
+  }
+
+  @Get('/categories/:id')
+  findOneCategory(@Param('id') id: string) {
+    return this.skillService.findOneCategory(id);
+  }
+
+  @Delete('/categories/:id')
+  removeCategory(@Param('id') id: string) {
+    return this.skillService.removeCategory(id);
+  }
+
+  // SKILLS
   @Post()
   createSkill(@Body() createSkillDto: CreateSkillDto) {
     return this.skillService.createSkill(createSkillDto);
