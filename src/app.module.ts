@@ -3,7 +3,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { RoadmapModule } from './roadmap/roadmap.module';
 import { SkillModule } from './skill/skill.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 import appConfig from './config/app.config';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -24,8 +27,10 @@ import appConfig from './config/app.config';
     }),
     RoadmapModule,
     SkillModule,
+    AuthModule,
+    UsersModule,
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule {}
