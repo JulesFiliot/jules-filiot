@@ -3,6 +3,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth/auth.service';
 import { LocalAuthGuard } from './auth/local-auth.guard';
 
+// useless comment for test purposes
 @Controller()
 export class AppController {
   constructor(private authService: AuthService){}
