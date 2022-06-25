@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateRoadmapDto } from './dto/create-roadmap.dto';
 import { CreateTimeStampDto } from './dto/create-timeStamp.dto';
 import { UpdateRoadMapDto } from './dto/update-roadmap.dto';
@@ -11,6 +12,7 @@ export class RoadmapController {
   constructor(private readonly roadmapService: RoadmapService) {}
 
   // TIME STAMPS
+  @UseGuards(JwtAuthGuard)
   @ApiTags('time stamps')
   @Post('/timestamps')
   createTimeStamp(@Body() createTimeStampDto: CreateTimeStampDto) {
@@ -29,12 +31,14 @@ export class RoadmapController {
     return this.roadmapService.findOneTimeStamp(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @ApiTags('time stamps')
   @Patch('/timestamps/:id')
   updateTimeStamp(@Param('id') id: string, @Body() updateTimeStampDto: UpdateTimeStampDto) {
     return this.roadmapService.updateTimeStamp(id, updateTimeStampDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @ApiTags('time stamps')
   @Delete('/timestamps/:id')
   removeTimeStamp(@Param('id') id: string) {
@@ -42,6 +46,7 @@ export class RoadmapController {
   }
 
   // ROADMAPS
+  @UseGuards(JwtAuthGuard)
   @ApiTags('roadmaps')
   @Post()
   createRoadmap(@Body() createRoadmapDto: CreateRoadmapDto) {
@@ -54,6 +59,7 @@ export class RoadmapController {
     return this.roadmapService.findAllRoadmap();
   }
 
+  @UseGuards(JwtAuthGuard)
   @ApiTags('roadmaps')
   @Patch(':id')
   updateRoadmap(@Param('id') id: string, @Body() updateRoadMapDto: UpdateRoadMapDto) {
@@ -66,6 +72,7 @@ export class RoadmapController {
     return this.roadmapService.findOneRoadmap(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @ApiTags('roadmaps')
   @Delete(':id')
   removeRoadmap(@Param('id') id: string) {

@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateSkillDto } from './dto/create-skill.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { UpdateSkillDto } from './dto/update-skill.dto';
@@ -9,32 +10,35 @@ import { SkillService } from './skill.service';
 export class SkillController {
   constructor(private readonly skillService: SkillService) {}
 
-  // CATEGORIES
-  @ApiTags('categories')
+  // SKILLS CATEGORIES
+  @ApiTags('skills categories')
   @Get('/categories')
   findAllCategories() {
     return this.skillService.findAllCategories();
   }
 
-  @ApiTags('categories')
+  @UseGuards(JwtAuthGuard)
+  @ApiTags('skills categories')
   @Patch('/categories/:id')
   updateCategory(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
     return this.skillService.updateCategory(id, updateCategoryDto);
   }
 
-  @ApiTags('categories')
+  @ApiTags('skills categories')
   @Get('/categories/:id')
   findOneCategory(@Param('id') id: string) {
     return this.skillService.findOneCategory(id);
   }
 
-  @ApiTags('categories')
+  @UseGuards(JwtAuthGuard)
+  @ApiTags('skills categories')
   @Delete('/categories/:id')
   removeCategory(@Param('id') id: string) {
     return this.skillService.removeCategory(id);
   }
 
   // SKILLS
+  @UseGuards(JwtAuthGuard)
   @ApiTags('skills')
   @Post()
   createSkill(@Body() createSkillDto: CreateSkillDto) {
@@ -47,6 +51,7 @@ export class SkillController {
     return this.skillService.findAllSkills();
   }
 
+  @UseGuards(JwtAuthGuard)
   @ApiTags('skills')
   @Patch(':id')
   updateSkill(@Param('id') id: string, @Body() updateSkillDto: UpdateSkillDto) {
@@ -59,6 +64,7 @@ export class SkillController {
     return this.skillService.findOneSkill(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @ApiTags('skills')
   @Delete(':id')
   removeSkill(@Param('id') id: string) {
