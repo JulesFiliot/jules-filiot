@@ -45,7 +45,7 @@ export class UsersService {
     });
     if (!user) throw new NotFoundException(`Could not find user of id ${id}`);
 
-    const savedUser = await this.usersRepository.save(user);
+    const savedUser = await this.usersRepository.save({ ...user, password: hashPassword(user.password) });
     delete savedUser['password'];
     return savedUser;
   };
