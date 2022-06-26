@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Users } from './entities/users.entity';
 import { CreateUsersDto } from './dto/create-users.dto';
 import { UpdateUsersDto } from './dto/update-users.dto';
+import { hashPassword } from 'src/utils/bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -30,8 +31,8 @@ export class UsersService {
   async createUser(createUsersDto: CreateUsersDto) {
     const isUsernameUsed = await this.isUsernameUsed(createUsersDto.username);
     if (isUsernameUsed) throw new NotAcceptableException(`The username '${createUsersDto.username}' is already in use`);
-  
-    const user = this.usersRepository.create(createUsersDto);
+
+    const user = this.usersRepository.create({ ...createUsersDto, password: hashPassword(createUsersDto.password) });
     const savedUser = await this.usersRepository.save(user);
     delete savedUser['password'];
     return savedUser;
