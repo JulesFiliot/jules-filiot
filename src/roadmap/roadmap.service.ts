@@ -2,11 +2,11 @@ import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestj
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateRoadmapDto } from './dto/create-roadmap.dto';
-import { CreateTimeStampDto } from './dto/create-timeStamp.dto';
+import { CreateTimeStampDto } from './dto/create-panelEntry.dto';
 import { UpdateRoadMapDto } from './dto/update-roadmap.dto';
-import { UpdateTimeStampDto } from './dto/update-timeStamp.dto';
+import { UpdateTimeStampDto } from './dto/update-panelEntry.dto';
 import { Roadmap } from './entities/roadmap.entity';
-import { TimeStamp } from './entities/timeStamp.entity';
+import { TimeStamp } from './entities/panelEntry.entity';
 import * as moment from 'moment';
 
 @Injectable()

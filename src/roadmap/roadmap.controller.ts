@@ -2,9 +2,9 @@ import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@n
 import { ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateRoadmapDto } from './dto/create-roadmap.dto';
-import { CreateTimeStampDto } from './dto/create-timeStamp.dto';
+import { CreateTimeStampDto } from './dto/create-panelEntry.dto';
 import { UpdateRoadMapDto } from './dto/update-roadmap.dto';
-import { UpdateTimeStampDto } from './dto/update-timeStamp.dto';
+import { UpdateTimeStampDto } from './dto/update-panelEntry.dto';
 import { RoadmapService } from './roadmap.service';
 
 @Controller('roadmaps')

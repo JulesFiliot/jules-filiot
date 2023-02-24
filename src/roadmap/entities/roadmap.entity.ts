@@ -1,5 +1,5 @@
 import { Column, Entity, JoinTable, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { TimeStamp } from './timeStamp.entity';
+import { PanelEntry } from './panelEntry.entity';
 
 @Entity()
 export class Roadmap {
@@ -14,8 +14,8 @@ export class Roadmap {
 
 	@JoinTable()
 	@OneToMany(
-	  () => TimeStamp,
-	  timeStamp => timeStamp.roadmap,
+	  () => PanelEntry,
+	  panelEntry => panelEntry.roadmap,
 	)
-	  timeStamps: TimeStamp[];
+	  timeStamps: PanelEntry[];
 }

@@ -1,17 +1,19 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Roadmap } from './roadmap.entity';
 
-// TODO add subtitle + change description to array of strings instead of a single string
 @Entity()
-export class TimeStamp {
+export class PanelEntry {
   @PrimaryGeneratedColumn()
     id: number;
 
   @Column()
     title: string;
 
+  @Column()
+    subtitle: string;
+
   @Column({ nullable: true })
-    description: string;
+    description: string[];
 
   @Column()
     startDate: Date;
