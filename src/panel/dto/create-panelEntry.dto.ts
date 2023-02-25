@@ -18,9 +18,9 @@ export class CreatePanelEntryDto {
 	@ApiProperty({ description: 'Panel entry description' })
   @IsOptional()
   @IsNotEmpty()
-	@IsString()
-  @MaxLength(1000)
-  readonly description: string;
+	@IsString({ each: true })
+  @MaxLength(1000, { each: true })
+  readonly description: string[];
 
   @ApiProperty({
     description: 'Panel entry start date. Date must be ISO8601.',
@@ -39,10 +39,10 @@ export class CreatePanelEntryDto {
   readonly endDate: Date;
 
   @ApiProperty({
-    description: 'Roadmap id owning the panel entry.',
+    description: 'Panel id owning the panel entry.',
   })
   @IsNumber()
   @IsOptional()
   @IsNotEmpty()
-  readonly roadmapId: number;
+  readonly panelId: number;
 }

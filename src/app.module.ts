@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { RoadmapModule } from './roadmap/roadmap.module';
+import { PanelModule } from './panel/panel.module';
 import { SkillModule } from './skill/skill.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
@@ -19,13 +19,13 @@ import { AppController } from './app.controller';
         password: process.env.DATABASE_PASSWORD,
         database: process.env.DATABASE_NAME,
         autoLoadEntities: true,
-        synchronize: true,
+        synchronize: false,
       }),
     }),
     ConfigModule.forRoot({
       load: [appConfig],
     }),
-    RoadmapModule,
+    PanelModule,
     SkillModule,
     AuthModule,
     UsersModule,

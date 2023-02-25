@@ -2,7 +2,7 @@ import { Column, Entity, JoinTable, OneToMany, PrimaryGeneratedColumn } from 'ty
 import { PanelEntry } from './panelEntry.entity';
 
 @Entity()
-export class Roadmap {
+export class Panel {
 	@PrimaryGeneratedColumn()
 	  id: number;
 
@@ -15,7 +15,7 @@ export class Roadmap {
 	@JoinTable()
 	@OneToMany(
 	  () => PanelEntry,
-	  panelEntry => panelEntry.roadmap,
+	  panelEntry => panelEntry.panel,
 	)
-	  timeStamps: PanelEntry[];
+	  panelEntries: PanelEntry[];
 }

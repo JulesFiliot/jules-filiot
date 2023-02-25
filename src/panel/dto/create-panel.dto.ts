@@ -1,14 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
 
-export class CreateRoadmapDto {
-	@ApiProperty({ description: 'Roadmap title' })
+export class CreatePanelDto {
+	@ApiProperty({ description: 'Panel title' })
 	@IsString()
   @MinLength(3)
   @MaxLength(20)
   readonly title: string;
 
-	@ApiProperty({ description: 'Roadmap description' })
+	@ApiProperty({ description: 'Panel description' })
   @IsOptional()
   @IsNotEmpty()
 	@IsString()

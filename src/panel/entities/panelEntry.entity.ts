@@ -1,5 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Roadmap } from './roadmap.entity';
+import { Panel } from './panel.entity';
 
 @Entity()
 export class PanelEntry {
@@ -12,7 +12,7 @@ export class PanelEntry {
   @Column()
     subtitle: string;
 
-  @Column({ nullable: true })
+  @Column('text', { nullable: true, array: true }) 
     description: string[];
 
   @Column()
@@ -25,12 +25,12 @@ export class PanelEntry {
     externalLink: string;
 
   @ManyToOne(
-    () => Roadmap,
-    roadmap => roadmap.timeStamps,
+    () => Panel,
+    panel => panel.panelEntries,
   )
   @JoinColumn({ referencedColumnName: 'id' })
-    roadmap: Roadmap;
+    panel: Panel;
 
   @Column({ nullable: true })
-    roadmapId: number;
+    panelId: number;
 }
