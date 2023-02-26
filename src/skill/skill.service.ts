@@ -79,7 +79,9 @@ export class SkillService {
   }
 
   findAllCategories() {
-    return this.categoryRepository.find();
+    return this.categoryRepository.find({
+      relations: ['skills'],
+    });
   }
 
   async updateCategory(id: string, updateCategoryDto: UpdateCategoryDto) {
