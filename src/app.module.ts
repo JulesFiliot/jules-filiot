@@ -8,6 +8,7 @@ import { UsersModule } from './users/users.module';
 import appConfig from './config/app.config';
 import { AppController } from './app.controller';
 import { MyInfoModule } from './myinfo/myinfo.module';
+import { ProjectModule } from './project/project.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { MyInfoModule } from './myinfo/myinfo.module';
     AuthModule,
     UsersModule,
     MyInfoModule,
+    ProjectModule,
   ],
   controllers: [AppController],
   providers: [],
