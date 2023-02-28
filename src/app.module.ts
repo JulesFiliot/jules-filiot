@@ -7,20 +7,27 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import appConfig from './config/app.config';
 import { AppController } from './app.controller';
-import { MyInfoModule } from './my-info/my-info.module';
+import { MyInfoModule } from './myinfo/myinfo.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
       useFactory: () => ({
         type: 'postgres',
-        host: process.env.DATABASE_HOST,
-        port: +process.env.DATABASE_PORT,
-        username: process.env.DATABASE_USER,
-        password: process.env.DATABASE_PASSWORD,
-        database: process.env.DATABASE_NAME,
-        autoLoadEntities: true,
+        host: process.env.DATABASE_HOST || 'postgres-db',
+        port: +process.env.DATABASE_PORT || 5432,
+        username: process.env.DATABASE_USER || 'postgres',
+        password: process.env.DATABASE_PASSWORD || 'postgres',
+        database: process.env.DATABASE_NAME || 'postgres',
+        entities: [__dirname + '/**/*.entity.ts', __dirname + '/**/*.entity.js'],
+        migrationsRun: false,
+        logging: true,
+        migrationsTableName: 'migration',
+        migrations: [__dirname + '/migration/**/*.ts', __dirname + '/migration/**/*.js'],
         synchronize: false,
+        cli: {
+          migrationsDir: 'src/migration'
+        }
       }),
     }),
     ConfigModule.forRoot({

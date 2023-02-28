@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsNotEmptyObject, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { Link } from 'src/common/classes/link';
 
 export class CreateMyInfoDto {
@@ -32,6 +32,9 @@ export class CreateMyInfoDto {
   readonly fullInfo: string[];
 
   @ApiProperty({ description: 'LinkedIn profile link' })
+  @IsOptional()
+  @ValidateNested()
+  @IsNotEmptyObject()
   @Type(() => Link)
   readonly linkedInLink: Link;
 }

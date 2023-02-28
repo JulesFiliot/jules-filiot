@@ -15,12 +15,12 @@ export class MyInfo {
   @Column({ nullable: false })
     email: string;
 
-  @Column({ nullable: true })
+  @Column('text', { nullable: true, array: true })
     fullInfo: string[];
 
-  @Column({ nullable: true })
+  @Column('text', { nullable: true, array: true })
     sumUpInfo: string[];
 
-  @Column({ nullable: true })
+  @Column({ type: 'json', nullable: true })
     linkedInLink: Link;
 }
