@@ -1,17 +1,19 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsNotEmpty, IsOptional, ValidateNested } from 'class-validator';
+import { MultiLanguageDTO } from 'src/common/classes/multi-language-dto';
 
 export class CreatePanelDto {
 	@ApiProperty({ description: 'Panel title' })
-	@IsString()
-  @MinLength(3)
-  @MaxLength(20)
-  readonly title: string;
+  @IsNotEmpty()
+  @ValidateNested()
+  @Type(() => MultiLanguageDTO)
+  readonly title: MultiLanguageDTO;
 
 	@ApiProperty({ description: 'Panel description' })
   @IsOptional()
   @IsNotEmpty()
-	@IsString()
-  @MaxLength(1000)
-	readonly description: string;
+  @ValidateNested()
+  @Type(() => MultiLanguageDTO)
+	readonly description: MultiLanguageDTO;
 }

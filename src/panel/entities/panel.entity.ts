@@ -1,3 +1,4 @@
+import { MultiLanguageDTO } from 'src/common/classes/multi-language-dto';
 import { Column, Entity, JoinTable, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { PanelEntry } from './panelEntry.entity';
 
@@ -6,11 +7,11 @@ export class Panel {
 	@PrimaryGeneratedColumn()
 	  id: number;
 
-	@Column()
-	  title: string;
+	@Column({ type: 'json' })
+	  title: MultiLanguageDTO;
 
-	@Column({ nullable: true })
-	  description: string;
+	@Column({ type: 'json', nullable: true })
+	  description: MultiLanguageDTO;
 
 	@JoinTable()
 	@OneToMany(

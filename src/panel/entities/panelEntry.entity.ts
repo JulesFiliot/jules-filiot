@@ -1,3 +1,5 @@
+import { Link } from 'src/common/classes/link';
+import { MultiLanguageDTO } from 'src/common/classes/multi-language-dto';
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Panel } from './panel.entity';
 
@@ -6,14 +8,14 @@ export class PanelEntry {
   @PrimaryGeneratedColumn()
     id: number;
 
-  @Column()
-    title: string;
+  @Column({ type: 'json' })
+    title: MultiLanguageDTO;
 
-  @Column()
-    subtitle: string;
+  @Column('json', { array: true })
+    subtitle: MultiLanguageDTO;
 
-  @Column('text', { nullable: true, array: true }) 
-    description: string[];
+  @Column('json', { nullable: true, array: true }) 
+    description?: MultiLanguageDTO[];
 
   @Column()
     startDate: Date;
@@ -21,8 +23,8 @@ export class PanelEntry {
   @Column({ nullable: true })
     endDate: Date;
 
-  @Column({ nullable: true })
-    externalLink: string;
+  @Column('json', { nullable: true, array: true })
+    externalLinks: Link[];
 
   @ManyToOne(
     () => Panel,

@@ -1,4 +1,5 @@
 import { Link } from 'src/common/classes/link';
+import { MultiLanguageDTO } from 'src/common/classes/multi-language-dto';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
@@ -15,11 +16,11 @@ export class MyInfo {
   @Column({ nullable: false })
     email: string;
 
-  @Column('text', { nullable: true, array: true })
-    fullInfo: string[];
+  @Column('json', { nullable: true, array: true })
+    fullInfo?: MultiLanguageDTO[];
 
-  @Column('text', { nullable: true, array: true })
-    sumUpInfo: string[];
+  @Column('json', { nullable: true, array: true })
+    sumUpInfo?: MultiLanguageDTO[];
 
   @Column({ type: 'json', nullable: true })
     linkedInLink: Link;

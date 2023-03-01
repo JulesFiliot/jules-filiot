@@ -1,9 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, MaxLength } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsNotEmpty, ValidateNested } from 'class-validator';
+import { MultiLanguageDTO } from 'src/common/classes/multi-language-dto';
 
 export class UpdateCategoryDto {
 	@ApiProperty({ description: 'Category title' })
-	@IsString()
-  @MaxLength(30)
-  readonly title: string;
+	@IsNotEmpty()
+  @ValidateNested()
+  @Type(() => MultiLanguageDTO)
+  readonly title: MultiLanguageDTO;
 }

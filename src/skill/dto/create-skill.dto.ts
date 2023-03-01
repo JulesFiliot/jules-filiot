@@ -1,21 +1,22 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Transform } from 'class-transformer';
-import { IsNotEmpty, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
+import { Transform, Type } from 'class-transformer';
+import { IsNotEmpty, IsOptional, ValidateNested } from 'class-validator';
+import { MultiLanguageDTO } from 'src/common/classes/multi-language-dto';
 import { Category } from '../entities/category.entity';
 
 export class CreateSkillDto {
 	@ApiProperty({ description: 'Skill title' })
-	@IsString()
-  @MinLength(3)
-  @MaxLength(30)
-  readonly title: string;
+	@IsNotEmpty()
+  @ValidateNested()
+  @Type(() => MultiLanguageDTO)
+  readonly title: MultiLanguageDTO;
 
 	@ApiProperty({ description: 'Skill description' })
   @IsOptional()
   @IsNotEmpty()
-	@IsString()
-  @MaxLength(1000)
-	readonly description: string;
+  @ValidateNested()
+  @Type(() => MultiLanguageDTO)
+	readonly description: MultiLanguageDTO;
 
   @ApiProperty({ description: 'Skill category' })
   @IsNotEmpty()

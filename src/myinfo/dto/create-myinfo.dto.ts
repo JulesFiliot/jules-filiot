@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsEmail, IsNotEmpty, IsNotEmptyObject, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { Link } from 'src/common/classes/link';
+import { MultiLanguageDTO } from 'src/common/classes/multi-language-dto';
 
 export class CreateMyInfoDto {
 
@@ -23,13 +24,17 @@ export class CreateMyInfoDto {
 
   @ApiProperty({ description: 'Short description of ones profile. An array of some strings representing different bullet points' })
   @IsOptional()
-  @IsString({ each: true })
-  readonly sumUpInfo: string[];
+  @IsNotEmpty()
+  @ValidateNested()
+  @Type(() => MultiLanguageDTO)
+  readonly sumUpInfo: MultiLanguageDTO[];
 
   @ApiProperty({ description: 'Extensive description of ones profile. An array of many strings representing different paragraphs' })
   @IsOptional()
-  @IsString({ each: true })
-  readonly fullInfo: string[];
+  @IsNotEmpty()
+  @ValidateNested()
+  @Type(() => MultiLanguageDTO)
+  readonly fullInfo: MultiLanguageDTO[];
 
   @ApiProperty({ description: 'LinkedIn profile link' })
   @IsOptional()

@@ -1,10 +1,11 @@
-import { IsString, IsUrl, MaxLength, MinLength } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsString, IsUrl, ValidateNested } from 'class-validator';
+import { MultiLanguageDTO } from './multi-language-dto';
 
 export class Link {
-  @IsString()
-  @MinLength(1)
-  @MaxLength(50)
-    title: string;
+  @ValidateNested()
+  @Type(() => MultiLanguageDTO)
+    title: MultiLanguageDTO;
   
   @IsString()
   @IsUrl()

@@ -1,26 +1,30 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDateString, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsDateString, IsNotEmpty, IsNumber, IsOptional, ValidateNested } from 'class-validator';
+import { Link } from 'src/common/classes/link';
+import { MultiLanguageDTO } from 'src/common/classes/multi-language-dto';
 import { DateIsGreaterThan } from '../../common/decorators/dateIsGreaterThan.decorator';
 
 export class CreatePanelEntryDto {
 	@ApiProperty({ description: 'Panel entry title' })
-	@IsString()
-  @MinLength(3)
-  @MaxLength(30)
-  readonly title: string;
+	@IsNotEmpty()
+  @ValidateNested()
+  @Type(() => MultiLanguageDTO)
+  readonly title: MultiLanguageDTO;
 	
   @ApiProperty({ description: 'Panel entry subtitle' })
-	@IsString()
-  @MinLength(3)
-  @MaxLength(30)
-	readonly subtitle: string;
+	@IsNotEmpty()
+  @ValidateNested()
+  @Type(() => MultiLanguageDTO)
+	readonly subtitle: MultiLanguageDTO;
 
 	@ApiProperty({ description: 'Panel entry description' })
   @IsOptional()
   @IsNotEmpty()
-	@IsString({ each: true })
-  @MaxLength(1000, { each: true })
-  readonly description: string[];
+	@IsNotEmpty()
+  @ValidateNested()
+  @Type(() => MultiLanguageDTO)
+  readonly description: MultiLanguageDTO[];
 
   @ApiProperty({
     description: 'Panel entry start date. Date must be ISO8601.',
@@ -45,4 +49,13 @@ export class CreatePanelEntryDto {
   @IsOptional()
   @IsNotEmpty()
   readonly panelId: number;
+
+  @ApiProperty({
+    description: 'Panel entry additional links to useful resource.',
+  })
+  @IsOptional()
+  @IsNotEmpty()
+  @ValidateNested()
+  @Type(() => Link)
+  readonly externalLinks: Link[];
 }
