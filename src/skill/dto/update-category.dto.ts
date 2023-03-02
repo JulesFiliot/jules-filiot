@@ -1,12 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
-import { IsNotEmpty, ValidateNested } from 'class-validator';
-import { MultiLanguageDTO } from 'src/common/classes/multi-language-dto';
+import { PartialType } from '@nestjs/swagger';
+import { CreateCategoryDto } from './create-category.dto';
 
-export class UpdateCategoryDto {
-	@ApiProperty({ description: 'Category title' })
-	@IsNotEmpty()
-  @ValidateNested()
-  @Type(() => MultiLanguageDTO)
-  readonly title: MultiLanguageDTO;
-}
+export class UpdateCategoryDto extends PartialType(CreateCategoryDto) {}

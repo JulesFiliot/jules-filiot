@@ -16,10 +16,10 @@ export class MyInfo {
   @Column({ nullable: false })
     email: string;
 
-  @Column('json', { nullable: true, array: true })
+  @Column('json', { nullable: true })
     fullInfo?: MultiLanguageDTO[];
 
-  @Column('json', { nullable: true, array: true })
+  @Column('json', { nullable: true })
     sumUpInfo?: MultiLanguageDTO[];
 
   @Column({ type: 'json', nullable: true })

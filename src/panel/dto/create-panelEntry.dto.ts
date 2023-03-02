@@ -21,7 +21,6 @@ export class CreatePanelEntryDto {
 	@ApiProperty({ description: 'Panel entry description' })
   @IsOptional()
   @IsNotEmpty()
-	@IsNotEmpty()
   @ValidateNested()
   @Type(() => MultiLanguageDTO)
   readonly description: MultiLanguageDTO[];
