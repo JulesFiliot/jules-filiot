@@ -7,10 +7,10 @@ export class Skill {
 	@PrimaryGeneratedColumn()
 	  id: number;
 
-	@Column({ type: 'json', nullable: false })
+	@Column({ type: 'jsonb', nullable: false })
 	  title: MultiLanguageDTO;
 
-	@Column({ type: 'json', nullable: true })
+	@Column({ type: 'jsonb', nullable: true })
 	  description: MultiLanguageDTO;
 
 	@JoinColumn({ referencedColumnName: 'id' })

@@ -7,15 +7,15 @@ export class Project {
   @PrimaryGeneratedColumn()
     id: number;
 
-  @Column({ type: 'json', nullable: false })
+  @Column({ type: 'jsonb', nullable: false })
     title: MultiLanguageDTO;
 
-  @Column({ type: 'json', nullable: false })
+  @Column({ type: 'jsonb', nullable: false })
     description: MultiLanguageDTO;
 
-  @Column({ type: 'json', nullable: true })
+  @Column({ type: 'jsonb', nullable: true })
     gitLink: Link;
   
-  @Column('json', { nullable: true })
+  @Column('jsonb', { nullable: true })
     usefulLinks?: Link[];
 }

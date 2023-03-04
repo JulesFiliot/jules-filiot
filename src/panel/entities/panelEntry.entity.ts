@@ -8,13 +8,13 @@ export class PanelEntry {
   @PrimaryGeneratedColumn()
     id: number;
 
-  @Column({ type: 'json' })
+  @Column({ type: 'jsonb' })
     title: MultiLanguageDTO;
 
-  @Column('json', { array: true })
+  @Column({ type: 'jsonb'})
     subtitle: MultiLanguageDTO;
 
-  @Column('json', { nullable: true, array: true }) 
+  @Column('jsonb', { nullable: true, array: true }) 
     description?: MultiLanguageDTO[];
 
   @Column()
@@ -23,7 +23,7 @@ export class PanelEntry {
   @Column({ nullable: true })
     endDate: Date;
 
-  @Column('json', { nullable: true, array: true })
+  @Column('jsonb', { nullable: true, array: true })
     externalLinks: Link[];
 
   @ManyToOne(

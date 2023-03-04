@@ -7,7 +7,7 @@ export class Category {
 	@PrimaryGeneratedColumn()
 	  id: number;
 
-	@Column({ type: 'json' })
+	@Column({ type: 'jsonb' })
 	  title: MultiLanguageDTO;
 
 	@OneToMany(

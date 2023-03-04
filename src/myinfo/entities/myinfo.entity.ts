@@ -16,12 +16,12 @@ export class MyInfo {
   @Column({ nullable: false })
     email: string;
 
-  @Column('json', { nullable: true })
+  @Column('jsonb', { nullable: true })
     fullInfo?: MultiLanguageDTO[];
 
-  @Column('json', { nullable: true })
+  @Column('jsonb', { nullable: true })
     sumUpInfo?: MultiLanguageDTO[];
 
-  @Column({ type: 'json', nullable: true })
+  @Column({ type: 'jsonb', nullable: true })
     linkedInLink: Link;
 }

@@ -7,10 +7,10 @@ export class Panel {
 	@PrimaryGeneratedColumn()
 	  id: number;
 
-	@Column({ type: 'json' })
+	@Column({ type: 'jsonb' })
 	  title: MultiLanguageDTO;
 
-	@Column({ type: 'json', nullable: true })
+	@Column({ type: 'jsonb', nullable: true })
 	  description: MultiLanguageDTO;
 
 	@JoinTable()
