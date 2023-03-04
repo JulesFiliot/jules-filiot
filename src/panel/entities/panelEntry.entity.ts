@@ -14,7 +14,7 @@ export class PanelEntry {
   @Column({ type: 'jsonb'})
     subtitle: MultiLanguageDTO;
 
-  @Column('jsonb', { nullable: true, array: true }) 
+  @Column('jsonb', { nullable: true }) 
     description?: MultiLanguageDTO[];
 
   @Column()
