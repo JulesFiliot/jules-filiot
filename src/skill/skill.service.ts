@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { MultiLanguageDTO } from 'src/common/classes/multi-language-dto';
 import { Repository } from 'typeorm';
 import { CreateSkillDto } from './dto/create-skill.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
@@ -56,7 +57,7 @@ export class SkillService {
     return this.skillRepository.remove(skill);
   }
 
-  private async preloadCategoryByTitle(title: string): Promise<Category> {
+  private async preloadCategoryByTitle(title: MultiLanguageDTO): Promise<Category> {
     const existingCategory = await this.categoryRepository.findOne({ title });
     if (existingCategory) {
       return existingCategory;
@@ -79,7 +80,9 @@ export class SkillService {
   }
 
   findAllCategories() {
-    return this.categoryRepository.find();
+    return this.categoryRepository.find({
+      relations: ['skills'],
+    });
   }
 
   async updateCategory(id: string, updateCategoryDto: UpdateCategoryDto) {

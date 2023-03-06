@@ -2,25 +2,18 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsNotEmpty, IsOptional, ValidateNested } from 'class-validator';
 import { MultiLanguageDTO } from 'src/common/classes/multi-language-dto';
-import { CreateCategoryDto } from './create-category.dto';
 
-export class CreateSkillDto {
-	@ApiProperty({ description: 'Skill title' })
-	@IsNotEmpty()
+export class CreatePanelDto {
+	@ApiProperty({ description: 'Panel title' })
+  @IsNotEmpty()
   @ValidateNested()
   @Type(() => MultiLanguageDTO)
   readonly title: MultiLanguageDTO;
 
-	@ApiProperty({ description: 'Skill description' })
+	@ApiProperty({ description: 'Panel description' })
   @IsOptional()
   @IsNotEmpty()
   @ValidateNested()
   @Type(() => MultiLanguageDTO)
 	readonly description: MultiLanguageDTO;
-  
-  @ApiProperty({ description: 'Skill category' })
-  @IsNotEmpty()
-  @ValidateNested()
-  @Type(() => CreateCategoryDto)
-	readonly category: CreateCategoryDto;
 }

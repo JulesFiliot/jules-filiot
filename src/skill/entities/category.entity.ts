@@ -1,3 +1,4 @@
+import { MultiLanguageDTO } from 'src/common/classes/multi-language-dto';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Skill } from './skill.entity';
 
@@ -6,8 +7,8 @@ export class Category {
 	@PrimaryGeneratedColumn()
 	  id: number;
 
-	@Column()
-	  title: string;
+	@Column({ type: 'jsonb' })
+	  title: MultiLanguageDTO;
 
 	@OneToMany(
 	  () => Skill,

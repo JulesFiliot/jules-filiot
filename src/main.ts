@@ -13,7 +13,7 @@ async function bootstrap() {
 
   const options = new DocumentBuilder()
     .setTitle('jules.filiot')
-    .setDescription('Jules FILIOT personal website')
+    .setDescription('Jules FILIOT personal website API')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, options);

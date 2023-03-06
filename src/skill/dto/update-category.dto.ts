@@ -1,9 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsString, MaxLength } from 'class-validator';
+import { PartialType } from '@nestjs/swagger';
+import { CreateCategoryDto } from './create-category.dto';
 
-export class UpdateCategoryDto {
-	@ApiProperty({ description: 'Category title' })
-	@IsString()
-  @MaxLength(30)
-  readonly title: string;
-}
+export class UpdateCategoryDto extends PartialType(CreateCategoryDto) {}
