@@ -18,6 +18,13 @@ export class CreateProjectDto {
   @Type(() => MultiLanguageDTO)
   readonly description: MultiLanguageDTO;
 
+  @ApiProperty({ description: 'Project illustration link' })
+  @IsOptional()
+  @ValidateNested()
+  @IsNotEmptyObject()
+  @Type(() => Link)
+  readonly image: Link;
+
   @ApiProperty({ description: 'Git repository link' })
   @IsOptional()
   @ValidateNested()
