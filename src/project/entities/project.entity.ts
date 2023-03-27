@@ -19,6 +19,9 @@ export class Project {
   @Column({ type: 'jsonb', nullable: true })
     gitLink: Link;
   
+  @Column({ nullable: true, array: true, type: 'text' })
+    tags: string[];
+  
   @Column('jsonb', { nullable: true })
     usefulLinks?: Link[];
 }

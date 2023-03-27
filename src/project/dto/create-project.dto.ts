@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsNotEmpty, IsNotEmptyObject, IsOptional, ValidateNested } from 'class-validator';
+import { IsArray, IsNotEmpty, IsNotEmptyObject, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { Link } from 'src/common/classes/link';
 import { MultiLanguageDTO } from 'src/common/classes/multi-language-dto';
 
@@ -31,6 +31,12 @@ export class CreateProjectDto {
   @IsNotEmptyObject()
   @Type(() => Link)
   readonly gitLink: Link;
+
+  @ApiProperty({ description: 'Project\'s tags to list technologies and/or skills involved in this project' })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  readonly tags: string[];
 
   @ApiProperty({ description: 'Array of useful links related to the project' })
   @IsOptional()
