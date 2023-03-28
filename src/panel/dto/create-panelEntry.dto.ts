@@ -17,6 +17,13 @@ export class CreatePanelEntryDto {
   @ValidateNested()
   @Type(() => MultiLanguageDTO)
 	readonly subtitle: MultiLanguageDTO;
+  
+  @ApiProperty({ description: 'Panel entry location' })
+	@IsNotEmpty()
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => MultiLanguageDTO)
+  readonly location: MultiLanguageDTO;
 
 	@ApiProperty({ description: 'Panel entry description' })
   @IsOptional()
