@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsArray, IsNotEmpty, IsNotEmptyObject, IsOptional, IsString, ValidateNested } from 'class-validator';
+import { IsArray, IsNotEmpty, IsNotEmptyObject, IsNumber, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { Link } from 'src/common/classes/link';
 import { MultiLanguageDTO } from 'src/common/classes/multi-language-dto';
 
@@ -44,4 +44,10 @@ export class CreateProjectDto {
   @ValidateNested()
   @Type(() => Link)
   readonly usefulLinks: Link[];
+
+  @ApiProperty({ description: 'Project priority' })
+  @IsNotEmpty()
+  @IsOptional()
+  @IsNumber()
+  readonly priority: number;
 }

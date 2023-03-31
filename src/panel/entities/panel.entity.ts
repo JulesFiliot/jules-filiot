@@ -13,6 +13,9 @@ export class Panel {
 	@Column({ type: 'jsonb', nullable: true })
 	  description: MultiLanguageDTO;
 
+	@Column({ default: 0 })
+	  priority: number;
+
 	@JoinTable()
 	@OneToMany(
 	  () => PanelEntry,

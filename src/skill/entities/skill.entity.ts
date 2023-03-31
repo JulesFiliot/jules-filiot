@@ -22,4 +22,7 @@ export class Skill {
 	  }
 	)
 	  category: Category;
+
+	@Column({ default: 0 })
+	  priority: number;
 }

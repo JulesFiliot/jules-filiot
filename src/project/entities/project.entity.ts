@@ -24,4 +24,7 @@ export class Project {
   
   @Column('jsonb', { nullable: true })
     usefulLinks?: Link[];
+
+  @Column({ default: 0 })
+	  priority: number;
 }

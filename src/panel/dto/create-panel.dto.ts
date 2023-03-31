@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsNotEmpty, IsOptional, ValidateNested } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, ValidateNested } from 'class-validator';
 import { MultiLanguageDTO } from 'src/common/classes/multi-language-dto';
 
 export class CreatePanelDto {
@@ -16,4 +16,10 @@ export class CreatePanelDto {
   @ValidateNested()
   @Type(() => MultiLanguageDTO)
 	readonly description: MultiLanguageDTO;
+
+  @ApiProperty({ description: 'Panel priority' })
+  @IsNotEmpty()
+  @IsOptional()
+  @IsNumber()
+	readonly priority: number;
 }

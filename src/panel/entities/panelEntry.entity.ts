@@ -38,4 +38,7 @@ export class PanelEntry {
 
   @Column({ nullable: true })
     panelId: number;
+
+  @Column({ default: 0 })
+	  priority: number;
 }

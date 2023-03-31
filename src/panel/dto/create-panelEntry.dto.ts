@@ -64,4 +64,10 @@ export class CreatePanelEntryDto {
   @ValidateNested()
   @Type(() => Link)
   readonly externalLinks: Link[];
+
+  @ApiProperty({ description: 'Panel entry priority.' })
+  @IsNotEmpty()
+  @IsOptional()
+  @IsNumber()
+  readonly priority: number;
 }
