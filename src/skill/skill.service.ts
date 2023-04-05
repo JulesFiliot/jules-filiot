@@ -28,14 +28,19 @@ export class SkillService {
   }
 
   async updateSkill(id: string, updateSkillDto: UpdateSkillDto) {
-    const category = await this.preloadCategoryByTitle(updateSkillDto.category.title);
-    const skill = await this.skillRepository.preload({
-      id: +id,
-      ...updateSkillDto,
-      category,
+    const skill = await this.skillRepository.findOne(id, {
+      relations: ['category'],
     });
     if (!skill) throw new NotFoundException(`Could not find skill of id ${id}`);
-    return this.skillRepository.save(skill);
+    console.log({ skill });
+    const category = await this.preloadCategoryByTitle(skill.category.title);
+    const updatedSkill = {
+      id: +id,
+      ...skill,
+      ...updateSkillDto,
+      category,
+    };
+    return this.skillRepository.save(updatedSkill);
   }
 
   findAllSkills() {

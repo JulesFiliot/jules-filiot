@@ -9,6 +9,9 @@ export class Category {
 
 	@Column({ type: 'jsonb' })
 	  title: MultiLanguageDTO;
+	
+	@Column({ default: 0 })
+	  priority: number;
 
 	@OneToMany(
 	  () => Skill,

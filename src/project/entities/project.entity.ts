@@ -14,8 +14,17 @@ export class Project {
     description: MultiLanguageDTO;
 
   @Column({ type: 'jsonb', nullable: true })
+    image: Link;
+
+  @Column({ type: 'jsonb', nullable: true })
     gitLink: Link;
+  
+  @Column({ nullable: true, array: true, type: 'text' })
+    tags: string[];
   
   @Column('jsonb', { nullable: true })
     usefulLinks?: Link[];
+
+  @Column({ default: 0 })
+	  priority: number;
 }

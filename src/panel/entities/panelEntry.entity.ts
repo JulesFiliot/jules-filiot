@@ -14,6 +14,9 @@ export class PanelEntry {
   @Column({ type: 'jsonb'})
     subtitle: MultiLanguageDTO;
 
+  @Column({ type: 'jsonb', nullable: true })
+    location: MultiLanguageDTO;  
+
   @Column('jsonb', { nullable: true }) 
     description?: MultiLanguageDTO[];
 
@@ -35,4 +38,7 @@ export class PanelEntry {
 
   @Column({ nullable: true })
     panelId: number;
+
+  @Column({ default: 0 })
+	  priority: number;
 }
