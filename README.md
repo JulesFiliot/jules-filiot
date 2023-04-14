@@ -6,4 +6,4 @@ Jules
 
 ## About
 
-This project was fully made using [NestJS](https://nestjs.com/) framework.
+This project was entirely developed using [NestJS](https://nestjs.com/) framework.
