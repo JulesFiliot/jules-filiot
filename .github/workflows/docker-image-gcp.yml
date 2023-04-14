@@ -1,0 +1,47 @@
+name: Deploy to GCP
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  GCP_PROJECT_ID: jules-filiot-server
+  IMAGE_NAME: jules.filiot/nestjs-server
+  IMAGE_TAG: ${{ github.sha }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Authenticate with GCP
+      - name: Authenticate with GCP
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          project_id: ${{ env.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+
+      # Log in to Artifact Registry
+      - name: Log in to Artifact Registry
+        run: |
+          gcloud auth configure-docker -q
+
+      # Build and push the Docker image
+      - name: Build and push Docker image
+        run: |
+          docker-compose build --pull
+          docker-compose push
+
+      # Deploy the image to Cloud Run
+      - name: Deploy to Cloud Run
+        uses: google-github-actions/deploy-cloud-run@v0.5.0
+        with:
+          service_name: your-service-name
+          image_uri: gcr.io/${{ env.GCP_PROJECT_ID }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          region: your-region
+          platform: managed
+          max_instances: 1
