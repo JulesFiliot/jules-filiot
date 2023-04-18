@@ -18,11 +18,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Debugging
-        run: |
-          echo ${{ secrets.DB_TYPE }}
-          echo ${{ secrets.DATABASE_HOST }}
-
       # Authenticate with GCP
       - name: Authenticate with GCP
         uses: google-github-actions/setup-gcloud@v1
