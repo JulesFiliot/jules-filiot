@@ -20,7 +20,7 @@ jobs:
 
       # Authenticate with GCP
       - name: Authenticate with GCP
-        uses: google-github-actions/setup-gcloud@master
+        uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: ${{ env.GCP_PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SA_KEY }}
@@ -38,7 +38,7 @@ jobs:
 
       # Deploy the image to Cloud Run
       - name: Deploy to Cloud Run
-        uses: google-github-actions/deploy-cloud-run@v0.5.0
+        uses: google-github-actions/deploy-cloudrun@v1
         with:
           service_name: your-service-name
           image_uri: gcr.io/${{ env.GCP_PROJECT_ID }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
