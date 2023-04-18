@@ -30,6 +30,18 @@ jobs:
         run: |
           gcloud auth configure-docker -q
 
+      # Set environment variables from secrets
+      - name: Set environment variables
+        run: |
+          echo "export DB_TYPE=${{ secrets.DB_TYPE }}" >> $GITHUB_ENV
+          echo "export DATABASE_HOST=${{ secrets.DATABASE_HOST }}" >> $GITHUB_ENV
+          echo "export DATABASE_USER=${{ secrets.DATABASE_USER }}" >> $GITHUB_ENV
+          echo "export DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}" >> $GITHUB_ENV
+          echo "export DATABASE_NAME=${{ secrets.DATABASE_NAME }}" >> $GITHUB_ENV
+          echo "export JWT_SECRET=${{ secrets.JWT_SECRET }}" >> $GITHUB_ENV
+          echo "export DATABASE_PORT=${{ secrets.DATABASE_PORT }}" >> $GITHUB_ENV
+          echo "export APP_PORT=${{ secrets.APP_PORT }}" >> $GITHUB_ENV
+
       # Build and push the Docker image
       - name: Build and push Docker image
         run: |
@@ -40,8 +52,8 @@ jobs:
       - name: Deploy to Cloud Run
         uses: google-github-actions/deploy-cloudrun@v1
         with:
-          service_name: your-service-name
+          service_name: jules-filiot-nest-server
           image_uri: gcr.io/${{ env.GCP_PROJECT_ID }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
-          region: your-region
+          region: northamerica-northeast1
           platform: managed
           max_instances: 1
