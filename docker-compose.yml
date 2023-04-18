@@ -6,15 +6,15 @@ services:
       dockerfile: ./Dockerfile.production
     image: jules.filiot/nestjs-server
     environment:
-      DB_TYPE: ${{ env.DB_TYPE }}
-      POSTGRES_HOST: ${{ env.DATABASE_HOST }}
-      POSTGRES_USER: ${{ env.DATABASE_USER }}
-      POSTGRES_PASSWORD: ${{ env.DATABASE_PASSWORD }}
-      DATABASE_NAME: ${{ env.DATABASE_NAME }}
+      DB_TYPE: ${{ secrets.DB_TYPE }}
+      POSTGRES_HOST: ${{ secrets.DATABASE_HOST }}
+      POSTGRES_USER: ${{ secrets.DATABASE_USER }}
+      POSTGRES_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+      DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
       POSTGRES_SYNC: 'false'
-      JWT_SECRET: ${{ env.JWT_SECRET }}
-      DATABASE_PORT: ${{ env.DATABASE_PORT }}
-      APP_PORT: ${{ env.APP_PORT }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+      APP_PORT: ${{ secrets.APP_PORT }}
     ports:
       - "3000:3000"
     container_name: jules-filiot-nestjs-server
