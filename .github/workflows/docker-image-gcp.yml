@@ -25,11 +25,6 @@ jobs:
           project_id: ${{ env.GCP_PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SA_KEY }}
 
-      # Log in to Artifact Registry
-      - name: Log in to Artifact Registry
-        run: |
-          gcloud auth configure-docker -q
-
       # Set environment variables from secrets
       - name: Set environment variables
         run: |
@@ -44,7 +39,17 @@ jobs:
 
       # Build and push the Docker image
       - name: Build and push Docker image
+        env:
+          DB_TYPE: ${{ secrets.DB_TYPE }}
+          DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+          DATABASE_USER: ${{ secrets.DATABASE_USER }}
+          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+          APP_PORT: ${{ secrets.APP_PORT }}
         run: |
+          export $(cat $GITHUB_ENV | xargs)
           docker-compose build --pull
           docker-compose push
 
