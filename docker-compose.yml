@@ -17,7 +17,7 @@ services:
       APP_PORT: ${APP_PORT}
     ports:
       - "3000:3000"
-    container_name: jules-filiot-nestjs-server
+    container_name: jules.filiot/nestjs-server
     volumes:
       - /app/node_modules
       - .:/app
