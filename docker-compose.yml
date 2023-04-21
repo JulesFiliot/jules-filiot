@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile.production
-    image: ghcr.io/JulesFiliot/jules-filiot-back
+    image: ghcr.io/julesfiliot/jules-filiot-back
     environment:
       DB_TYPE: ${DB_TYPE}
       POSTGRES_HOST: ${DATABASE_HOST}
@@ -17,7 +17,7 @@ services:
       APP_PORT: ${APP_PORT}
     ports:
       - "3000:3000"
-    container_name: JulesFiliot/container/jules-filiot-back
+    container_name: julesfiliot/container/jules-filiot-back
     volumes:
       - /app/node_modules
       - .:/app

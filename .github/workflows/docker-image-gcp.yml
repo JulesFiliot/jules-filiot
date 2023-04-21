@@ -7,7 +7,7 @@ on:
 
 env:
   GCP_PROJECT_ID: jules-filiot-server
-  IMAGE_NAME: ghcr.io/JulesFiliot/jules-filiot-back
+  IMAGE_NAME: ghcr.io/julesfiliot/jules-filiot-back
   IMAGE_TAG: ${{ github.sha }}
 
 jobs:
