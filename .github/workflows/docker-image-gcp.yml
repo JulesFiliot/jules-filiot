@@ -60,7 +60,7 @@ jobs:
         uses: google-github-actions/deploy-cloudrun@v1
         with:
           service_name: jules-filiot-nest-server
-          image_uri: gcr.io/${{ env.GCP_PROJECT_ID }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          image_uri: ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
           region: northamerica-northeast1
           platform: managed
           max_instances: 1
