@@ -23,7 +23,7 @@ jobs:
         uses: google-github-actions/auth@v1
         with:
           service_account: ${{ secrets.GCP_ACCOUNT }}
-          credentials: ${{ secrets.GCP_SA_KEY }}
+          credentials_json: ${{ secrets.GCP_SA_JSON }}
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@v1
         with:
