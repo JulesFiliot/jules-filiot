@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile.production
-    image: jules.filiot/nestjs-server
+    image: ghcr.io/jules-filiot/nestjs-server
     environment:
       DB_TYPE: ${DB_TYPE}
       POSTGRES_HOST: ${DATABASE_HOST}
@@ -17,7 +17,7 @@ services:
       APP_PORT: ${APP_PORT}
     ports:
       - "3000:3000"
-    container_name: jules.filiot/nestjs-server
+    container_name: jules.filiot/container/nestjs-server
     volumes:
       - /app/node_modules
       - .:/app
