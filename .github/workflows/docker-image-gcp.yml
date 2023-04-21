@@ -65,4 +65,3 @@ jobs:
         with:
           service: jules-filiot-nest-server
           image: ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
-          region: northamerica-northeast1
