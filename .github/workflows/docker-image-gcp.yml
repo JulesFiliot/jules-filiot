@@ -62,6 +62,6 @@ jobs:
       - name: Deploy to Cloud Run
         uses: google-github-actions/deploy-cloudrun@v1
         with:
-          service: jules-filiot-nestjs-server
+          service: jules-filiot-nest-server
           region: us-central1
           image: ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
