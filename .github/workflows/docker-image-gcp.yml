@@ -55,9 +55,9 @@ jobs:
         run: |
           export $(cat $GITHUB_ENV | xargs)
           docker-compose build --pull
-          docker tag ${{ env.IMAGE_NAME }} ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          docker tag ${{ env.IMAGE_NAME }} gcr.io/${{ env.GCP_PROJECT_ID }}/jules-filiot-back:${{ env.IMAGE_TAG }}
           echo ${{ secrets.GIT_TOKEN }} | docker login ghcr.io -u JulesFiliot --password-stdin
-          docker push ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          docker push gcr.io/${{ env.GCP_PROJECT_ID }}/jules-filiot-back:${{ env.IMAGE_TAG }}
 
       # Deploy the image to Cloud Run
       - name: Deploy to Cloud Run
@@ -65,4 +65,4 @@ jobs:
         with:
           service: jules-filiot-nest-server
           region: us-central1
-          image: ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          image: gcr.io/${{ env.GCP_PROJECT_ID }}/jules-filiot-back:${{ env.IMAGE_TAG }}
