@@ -57,6 +57,7 @@ jobs:
           docker-compose build --pull
           docker tag ${{ env.IMAGE_NAME }} gcr.io/${{ env.GCP_PROJECT_ID }}/jules-filiot-back:${{ env.IMAGE_TAG }}
           echo ${{ secrets.GIT_TOKEN }} | docker login ghcr.io -u JulesFiliot --password-stdin
+          gcloud auth configure-docker
           docker push gcr.io/${{ env.GCP_PROJECT_ID }}/jules-filiot-back:${{ env.IMAGE_TAG }}
 
       # Deploy the image to Cloud Run
