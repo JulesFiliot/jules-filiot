@@ -67,3 +67,4 @@ jobs:
           service: jules-filiot-nest-server
           region: us-central1
           image: gcr.io/${{ env.GCP_PROJECT_ID }}/jules-filiot-back:${{ env.IMAGE_TAG }}
+          port: ${{ secrets.APP_PORT }}
