@@ -9,6 +9,7 @@ env:
   GCP_PROJECT_ID: jules-filiot-server
   IMAGE_NAME: ghcr.io/julesfiliot/jules-filiot-back
   IMAGE_TAG: ${{ github.sha }}
+  NODE_ENV: production
 
 jobs:
   deploy:
@@ -40,6 +41,7 @@ jobs:
           echo "export JWT_SECRET=${{ secrets.JWT_SECRET }}" >> $GITHUB_ENV
           echo "export DATABASE_PORT=${{ secrets.DATABASE_PORT }}" >> $GITHUB_ENV
           echo "export APP_PORT=${{ secrets.APP_PORT }}" >> $GITHUB_ENV
+          echo "export NODE_ENV=${{ env.NODE_ENV }}" >> $GITHUB_ENV
 
       # Build and push the Docker image
       - name: Build and push Docker image
@@ -52,6 +54,7 @@ jobs:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
           APP_PORT: ${{ secrets.APP_PORT }}
+          NODE_ENV: ${{ env.NODE_ENV }}
         run: |
           export $(cat $GITHUB_ENV | xargs)
           docker-compose build --pull
