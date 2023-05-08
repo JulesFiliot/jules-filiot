@@ -6,23 +6,15 @@ services:
       dockerfile: ./Dockerfile.production
     image: ghcr.io/julesfiliot/jules-filiot-back
     environment:
-      DB_TYPE:
-        external: true
-      POSTGRES_HOST:
-        external: true
-      POSTGRES_USER:
-        external: true
-      POSTGRES_PASSWORD:
-        external: true
-      DATABASE_NAME:
-        external: true
+      DB_TYPE: ${DB_TYPE}
+      POSTGRES_HOST: ${DATABASE_HOST}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_NAME: ${DATABASE_NAME}
       POSTGRES_SYNC: 'false'
-      JWT_SECRET:
-        external: true
-      DATABASE_PORT:
-        external: true
-      APP_PORT:
-        external: true
+      JWT_SECRET: ${JWT_SECRET}
+      DATABASE_PORT: ${DATABASE_PORT}
+      APP_PORT: ${APP_PORT}
     ports:
       - "3000:3000"
     container_name: julesfiliot/container/jules-filiot-back
