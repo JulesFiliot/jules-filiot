@@ -23,40 +23,15 @@ jobs:
       - name: Authenticate with GCP
         uses: google-github-actions/auth@v1
         with:
-          service-account: ${{ secrets.GCP_SA_EMAIL }}
           credentials_json: ${{ secrets.GCP_SA_JSON }}
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: ${{ env.GCP_PROJECT_ID }}
 
-      # Set environment variables from secrets
-      - name: Set environment variables
-        run: |
-          echo "export DB_TYPE=${{ secrets.DB_TYPE }}" >> $GITHUB_ENV
-          echo "export DATABASE_HOST=${{ secrets.DATABASE_HOST }}" >> $GITHUB_ENV
-          echo "export DATABASE_USER=${{ secrets.DATABASE_USER }}" >> $GITHUB_ENV
-          echo "export DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}" >> $GITHUB_ENV
-          echo "export DATABASE_NAME=${{ secrets.DATABASE_NAME }}" >> $GITHUB_ENV
-          echo "export JWT_SECRET=${{ secrets.JWT_SECRET }}" >> $GITHUB_ENV
-          echo "export DATABASE_PORT=${{ secrets.DATABASE_PORT }}" >> $GITHUB_ENV
-          echo "export APP_PORT=${{ secrets.APP_PORT }}" >> $GITHUB_ENV
-          echo "export NODE_ENV=${{ env.NODE_ENV }}" >> $GITHUB_ENV
-
       # Build and push the Docker image
       - name: Build and push Docker image
-        env:
-          DB_TYPE: ${{ secrets.DB_TYPE }}
-          DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
-          DATABASE_USER: ${{ secrets.DATABASE_USER }}
-          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
-          APP_PORT: ${{ secrets.APP_PORT }}
-          NODE_ENV: ${{ env.NODE_ENV }}
         run: |
-          export $(cat $GITHUB_ENV | xargs)
           docker-compose build --pull
           docker tag ${{ env.IMAGE_NAME }} gcr.io/${{ env.GCP_PROJECT_ID }}/jules-filiot-back:${{ env.IMAGE_TAG }}
           echo ${{ secrets.GIT_TOKEN }} | docker login ghcr.io -u JulesFiliot --password-stdin
