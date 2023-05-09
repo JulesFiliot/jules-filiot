@@ -26,6 +26,7 @@ import { ProjectModule } from './project/project.module';
         migrationsTableName: 'migration',
         migrations: [__dirname + '/migration/**/*.ts', __dirname + '/migration/**/*.js'],
         synchronize: false,
+        ssl: true,
         cli: {
           migrationsDir: 'src/migration'
         }
