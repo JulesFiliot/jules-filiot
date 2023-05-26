@@ -14,11 +14,11 @@ async function bootstrap() {
 
   const options = new DocumentBuilder()
     .setTitle('jules.filiot')
-    .setDescription('Jules FILIOT personal website API')
+    .setDescription('Jules FILIOT personal website\'s API')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('doc', app, document);
 
   await app.listen(3000);
 }
