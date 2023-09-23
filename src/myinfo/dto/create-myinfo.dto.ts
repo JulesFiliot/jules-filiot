@@ -42,4 +42,11 @@ export class CreateMyInfoDto {
   @IsNotEmptyObject()
   @Type(() => Link)
   readonly linkedInLink: Link;
+
+  @ApiProperty({ description: 'Github profile link' })
+  @IsOptional()
+  @ValidateNested()
+  @IsNotEmptyObject()
+  @Type(() => Link)
+  readonly gitLink: Link;
 }

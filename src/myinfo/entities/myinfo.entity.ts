@@ -24,4 +24,7 @@ export class MyInfo {
 
   @Column({ type: 'jsonb', nullable: true })
     linkedInLink: Link;
+
+  @Column({ type: 'jsonb', nullable: true })
+    gitLink: Link;
 }
